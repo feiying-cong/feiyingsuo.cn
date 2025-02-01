@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>腾讯文档关键词直达搜索页</title>
+    <style>
+        /* 原有样式保留，新增搜索框样式 */
+        .search-box {
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+        }
+        #searchInput {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #0366d6;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        #searchButton {
+            padding: 10px 20px;
+            background: #0366d6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>腾讯文档关键词直达搜索</h1>
+        
+        <!-- 新增搜索框 -->
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="输入关键词，如“预算”“进度”...">
+            <button id="searchButton">立即搜索</button>
+        </div>
+
+        <!-- 原说明内容保留 -->
+        <h2>📝 使用说明</h2>
+        <ol>
+            <li>输入关键词后点击按钮，自动跳转到文档定位位置</li>
+            <li>打开文档后按 <kbd>Ctrl+F</kbd> 可二次搜索</li>
+        </ol>
+
+        <div class="doc-link">
+            <code id="docUrl">https://docs.qq.com/sheet/DRHlTWUhkaXl3bmp6</code>
+        </div>
+    </div>
+
+    <!-- 新增JavaScript -->
+    <script>
+        // 获取元素
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+        const docUrl = 'https://docs.qq.com/sheet/DRHlTWUhkaXl3bmp6';
+
+        // 触发搜索函数
+        function triggerSearch() {
+            const keyword = encodeURIComponent(searchInput.value.trim());
+            if (!keyword) {
+                alert('请输入搜索内容');
+                return;
+            }
+            // 拼接含关键词的URL
+            window.location.href = `${docUrl}#${keyword}`;
+        }
+
+        // 绑定事件
+        searchButton.addEventListener('click', triggerSearch);
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') triggerSearch();
+        });
+    </script>
+</body>
+</html>
